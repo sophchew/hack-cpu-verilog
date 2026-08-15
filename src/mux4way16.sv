@@ -13,12 +13,12 @@ module Mux4Way16 (
     input [1:0] sel,
     output [15:0] out
 );
-    wire aorb;
-    wire cord;
+    logic [15:0] aorb;
+    logic [15:0] cord;
     Mux16 mux1 (
         .a(a),
         .b(b),
-        .sel(sel[0])
+        .sel(sel[0]),
         .out(aorb)
     );
     Mux16 mux2 (
@@ -28,8 +28,11 @@ module Mux4Way16 (
         .out(cord)
     );
     Mux16 mux3 (
-        .a(aorb)
-    )
+        .a(aorb),
+        .b(cord),
+        .sel(sel[1]),
+        .out(out)
+    );
 
 
 endmodule
